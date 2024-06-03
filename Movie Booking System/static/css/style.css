@@ -1,0 +1,202 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(231, 98, 15); 
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+   width: 10000px;
+   height: 700px;
+    margin: 20px;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+    border-radius: 10px;
+}
+
+h1 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.login-container {
+    padding: 20px;
+}
+
+.login-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.login-title {
+    color: #333;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-form input {
+    width: 300px;
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.login-form button {
+    width: 300px;
+    padding: 10px;
+    background-color: #3897f0;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.login-form button:hover {
+    background-color: #287dcf;
+}
+
+.events-container h2 {
+    color: #333;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.events-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.events-container li {
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.events-container button {
+    padding: 5px 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.events-container button:hover {
+    background-color: #218838;
+}
+
+.events-container a {
+    display: block;
+    margin-top: 20px;
+    color: #3897f0;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.events-container a:hover {
+    text-decoration: underline;
+}
+.movie-image{
+    
+    width: 400px;
+    margin-left: 50px;
+    height: 400px;
+    transform: 1.5s;
+    box-shadow: 0px 0px 10px 10px rgb(61, 61, 60);
+
+}
+.movie-container{
+    display: flex;
+    margin-top: 70px;
+    justify-content: space-evenly;
+    height: 700px;
+    width: auto;
+}
+.movie-image:hover{
+    height: 500px;
+    width: 500px;
+
+    transition: 1.5s;
+}
+.context{
+    font-size: 20px;
+}
+
+
+
+.btn{
+    width: 200px;
+    height: 32px;
+    background-color: rgb(242, 242, 242);
+    color: rgb(0, 0, 0);
+    text-align: center;
+    margin-top: 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 20px;
+}
+.hol {
+    position: relative;
+}
+
+.hol > img {
+    display: block;
+    transition: opacity 0.3s ease;
+}
+
+.hol > a > button {
+    z-index: 100;
+    position: absolute;
+    left: 30%;
+    top: 40%;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.hol:hover > img {
+    opacity: 0.3;
+}
+
+.hol:hover > a > button {
+    opacity: 1;
+    transform: scale(1);
+}
+.star-rating {
+    display: flexbox;
+    gap: 5px; 
+}
+
+.star-rating .filled {
+    color: gold;
+}
+
+.star-rating .empty {
+    color: lightgray;
+}
+.log{
+    color: white;
+    font-size: 20px;
+}
