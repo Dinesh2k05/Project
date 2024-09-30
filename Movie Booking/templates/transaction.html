@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transaction</title>
+    <style>
+        body {
+            background-color: rgb(231, 98, 15);
+            font-family: Arial, sans-serif;
+            color: #fff;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        .transaction-details {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            text-align: left;
+        }
+        .transaction-details p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        .confirm-button {
+            background-color: #ff6600;
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+        .confirm-button:hover {
+            background-color: #ff4500;
+        }
+        .images {
+            margin-top: 30px;
+        }
+        .images img {
+            width: 150px;
+            height: auto;
+            margin: 0 10px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Transaction Details</h1>
+    <div class="transaction-details">
+        <p>Date: {{ date }}</p>
+        <p>Time: {{ time }}</p>
+        <p>Seats: {{ seats }}</p>
+        <p>Total Amount: {{ amount }}</p>
+        <form action="/confirm_booking" method="POST"> <!-- Update action to /confirm_booking -->
+            <button type="submit" class="confirm-button">Confirm Booking</button>
+        </form>
+    </div>
+    <div class="images">
+        <img src="{{ url_for('static', filename='images/popcorn.jpg') }}" alt="Popcorn">
+        <img src="{{ url_for('static', filename='images/tickets.jpg') }}" alt="Tickets">
+        <img src="{{ url_for('static', filename='images/movie.jpg') }}" alt="Movie">
+    </div>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glam Seats</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            background-color: #DEF2F1;
+            color: #17252A;
+            height: 100vh;
+        }
+
+        .header {
+            background-color: #2B7A78;
+            color: #FEFFFF;
+            padding: 15px 20px;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .navbar {
+            margin-right: 20px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: #FEFFFF;
+            font-size: 1.2em;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: #DEF2F1;
+        }
+
+        .stars {
+            font-size: 1.5em;
+            color: #FEFFFF;
+            display: flex;
+            align-items: center;
+        }
+
+        .stars .star {
+            margin-right: 5px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 60px);
+            padding: 20px;
+            background-color: #FEFFFF;
+            position: relative;
+        }
+
+        .content {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 20px;
+            max-width: 1200px;
+        }
+
+        .info {
+            max-width: 50%;
+            padding: 20px;
+            text-align: left;
+            font-size: 1.5em;
+            color: #3AAFA9;
+            line-height: 1.4;
+        }
+
+        .center-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            color: #2B7A78;
+            opacity: 0;
+        }
+
+        .button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            background-color: #3AAFA9;
+            color: #FEFFFF;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .button:hover {
+            background-color: #2B7A78;
+            transform: scale(1.05);
+        }
+
+        .button:active {
+            background-color: #17252A;
+            transform: scale(0.95);
+        }
+
+        .footer {
+            background-color: #2B7A78;
+            color: #FEFFFF;
+            text-align: center;
+            padding: 10px 0;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 1s ease-out forwards;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="stars">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+        </div>
+        <div class="navbar">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="content">
+            <!-- Paragraph about the online ticket booking system -->
+            <div class="info">
+                <p>
+                    Welcome to Glam Seats, your ultimate destination for booking the best seats at your favorite events, shows, and movies. 
+                    Enjoy an unparalleled experience with our seamless online ticket booking system, designed to bring the magic of cinema, theater, 
+                    and live performances right to your fingertips. With a user-friendly interface, instant confirmations, and exclusive deals, 
+                    Glam Seats ensures that you never miss a moment of the action. Book your escape with ease and excitement!
+                </p>
+            </div>
+
+            <!-- Center section for the Glam Seats heading and button -->
+            <div class="center-section">
+                <h1 class="fade-in-up">GLAM SEATS</h1>
+                <a href="{{ url_for('register') }}" class="button">Get Started</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        BOOK YOUR ESCAPE TODAY
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animation for the h1 element
+            anime({
+                targets: 'h1',
+                opacity: [0, 1],
+                translateY: [-20, 0],
+                duration: 1000,
+                easing: 'easeOutExpo'
+            });
+
+            // Animation for the button
+            anime({
+                targets: '.button',
+                scale: [1, 1.1],
+                duration: 500,
+                easing: 'easeInOutSine',
+                loop: true,
+                direction: 'alternate'
+            });
+        });
+    </script>
+</body>
+</html>

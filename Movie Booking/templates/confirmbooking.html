@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Booking</title>
+    <style>
+        body {
+            background-color: rgb(231, 98, 15);
+            font-family: Arial, sans-serif;
+            color: #fff;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        .payment-options {
+            margin-top: 30px;
+        }
+        .payment-option {
+            background-color: #333;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px;
+            display: inline-block;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .payment-option:hover {
+            background-color: #555;
+        }
+        .payment-option img {
+            width: 50px;
+            height: auto;
+            vertical-align: middle;
+        }
+        .payment-option span {
+            margin-left: 10px;
+            font-size: 1.2em;
+        }
+        .confirm-button {
+            background-color: white;
+            color: rgb(231, 98, 15);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .confirm-button:hover {
+            background-color: #ff4500;
+            color: white;
+        }
+        .confirmation-message {
+            display: none;
+            margin-top: 30px;
+        }
+        #qrcode {
+            margin-top: 30px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Confirm Booking</h1>
+    <div class="payment-options" id="payment-options">
+        <div class="payment-option" onclick="selectPaymentMethod('GPay')">
+            <img src="{{ url_for('static', filename='images/gpay.png') }}" alt="GPay">
+            <span>Google Pay</span>
+        </div>
+        <div class="payment-option" onclick="selectPaymentMethod('Debit Card')">
+            <img src="{{ url_for('static', filename='images/debit-card.png') }}" alt="Debit Card">
+            <span>Debit Card</span>
+        </div>
+        <div class="payment-option" onclick="selectPaymentMethod('Credit Card')">
+            <img src="{{ url_for('static', filename='images/credit-card.png') }}" alt="Credit Card">
+            <span>Credit Card</span>
+        </div>
+        <div class="payment-option" onclick="selectPaymentMethod('UPI')">
+            <img src="{{ url_for('static', filename='images/upi.jpg') }}" alt="UPI">
+            <span>UPI</span>
+        </div>
+    </div>
+    <form id="booking-form" action="/confirm_transaction" method="POST" onsubmit="return confirmBooking(event)">
+        <input type="hidden" id="payment-method" name="payment_method" value="">
+        <input type="hidden" id="seat-number" name="seat_number" value="A1"> <!-- Example seat number -->
+        <input type="hidden" id="movie-name" name="movie_name" value="PT SIR - Tamil"> <!-- Example movie name -->
+        <input type="hidden" id="date-time" name="date_time" value="2024-09-02 11:00"> <!-- Example date-time -->
+        <button type="submit" class="confirm-button">Confirm Booking</button>
+    </form>
+
+    <div class="confirmation-message" id="confirmation-message">
+        <h1>Your booking is confirmed!</h1>
+        <p>You will be redirected to your order history shortly.</p>
+    </div>
+
+    <div id="qrcode"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <script>
+        function selectPaymentMethod(method) {
+            document.getElementById('payment-method').value = method;
+            alert(`Payment method selected: ${method}`);
+        }
+
+        function confirmBooking(event) {
+            event.preventDefault(); // Prevent the form from submitting
+        
+            var paymentMethod = document.getElementById('payment-method').value;
+            var seatNumber = document.getElementById('seat-number').value;
+            var movieName = document.getElementById('movie-name').value;
+            var dateTime = document.getElementById('date-time').value;
+        
+            if (paymentMethod === '') {
+                alert('Please select a payment method.');
+                return false; // Prevent form submission
+            } else {
+                document.getElementById('payment-options').style.display = 'none'; // Hide payment options
+                document.getElementById('booking-form').style.display = 'none'; // Hide the form
+                document.getElementById('confirmation-message').style.display = 'block'; // Show the confirmation message
+        
+                // Generate QR code
+                var qrCodeElement = document.getElementById('qrcode');
+                qrCodeElement.style.display = 'block';
+        
+                var qrContent = `Booking Confirmed!\n\nSeat Number: ${seatNumber}\nMovie Name: ${movieName}\nDate & Time: ${dateTime}\nPayment Method: ${paymentMethod}`;
+                QRCode.toDataURL(qrContent, function (error, url) {
+                    if (error) {
+                        console.error(error);
+                        return;
+                    }
+                    
+                    // Create a temporary link to trigger download
+                    var tempLink = document.createElement('a');
+                    tempLink.href = url;
+                    tempLink.download = 'qrcode.png';
+                    tempLink.click();
+                    
+                    // Display QR code
+                    qrCodeElement.innerHTML = '<img src="' + url + '" />';
+                });
+        
+                // Redirect after a short delay
+                setTimeout(function() {
+                    window.location.href = "{{ url_for('order_history') }}";
+                }, 5000); // 5 seconds delay before redirecting to order history
+            }
+        }
+    </script>
+</body>
+</html>
